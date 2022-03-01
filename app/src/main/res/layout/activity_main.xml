@@ -50,6 +50,8 @@
         app:layout_constraintTop_toBottomOf="@+id/team1spinner" />
 
     <!--Divider to separate team1 and team2 -->
+
+    <!--Score for team2-->
     <View
         android:id="@+id/divider"
         android:layout_width="409dp"
@@ -59,10 +61,8 @@
         app:layout_constraintBottom_toTopOf="@+id/team2Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/team1score"
-        app:layout_constraintVertical_bias="0.372" />
+        app:layout_constraintTop_toBottomOf="@+id/team1score" />
 
-    <!--Score for team2-->
     <TextView
         android:id="@+id/team2score"
         android:layout_width="48dp"
@@ -118,7 +118,7 @@
     <!--Spinner to have list of possible score increments for team1-->
     <Spinner
         android:id="@+id/team1spinner"
-        android:layout_width="64dp"
+        android:layout_width="92dp"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
         android:minHeight="48dp"
@@ -144,7 +144,7 @@
     <!--Spinner to have list of possible score increments for team2-->
     <Spinner
         android:id="@+id/team2spinner"
-        android:layout_width="64dp"
+        android:layout_width="92dp"
         android:layout_height="48dp"
         android:layout_marginTop="28dp"
         app:layout_constraintEnd_toEndOf="parent"

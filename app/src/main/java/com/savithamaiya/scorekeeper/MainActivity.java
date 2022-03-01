@@ -1,15 +1,22 @@
 package com.savithamaiya.scorekeeper;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final int MAX_SCORE = 100;
+    public static final int MIN_SCORE = 0;
 
     TextView team1Score;
     TextView team2Score;
@@ -41,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<String> scoreSpinner = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, arraySpinner);
-        scoreSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        scoreSpinner.setDropDownViewResource(android.R.layout.simple_selectable_list_item);
 
         team1Spinner.setAdapter(scoreSpinner);
         team2Spinner.setAdapter(scoreSpinner);
@@ -58,7 +65,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int currentScore = Integer.parseInt(team1Score.getText().toString());
                 int spinnerValue = Integer.parseInt(team1Spinner.getSelectedItem().toString());
-                team1Score.setText(Integer.toString(currentScore+spinnerValue));
+                if(currentScore + spinnerValue <= 100) {
+                    team1Score.setText(Integer.toString(currentScore + spinnerValue));
+                } else {
+                    alert("Score cannot exceed max limit of 100!");
+                }
             }
         });
         team2Increase.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +77,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int currentScore = Integer.parseInt(team2Score.getText().toString());
                 int spinnerValue = Integer.parseInt(team2Spinner.getSelectedItem().toString());
-                team2Score.setText(Integer.toString(currentScore+spinnerValue));
+                if(currentScore + spinnerValue <= 100) {
+                    team2Score.setText(Integer.toString(currentScore + spinnerValue));
+                } else {
+                    alert("Score cannot exceed max limit of 100!");
+                }
             }
         });
         team1Decrease.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +89,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int currentScore = Integer.parseInt(team1Score.getText().toString());
                 int spinnerValue = Integer.parseInt(team1Spinner.getSelectedItem().toString());
-                team1Score.setText(Integer.toString(currentScore - spinnerValue  > 0 ? currentScore-spinnerValue : 0));
+                if(currentScore - spinnerValue >= 0) {
+                    team1Score.setText(Integer.toString(currentScore - spinnerValue));
+                } else {
+                    alert("Score cannot be less than 0!");
+                }
             }
         });
         team2Decrease.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +101,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int currentScore = Integer.parseInt(team2Score.getText().toString());
                 int spinnerValue = Integer.parseInt(team2Spinner.getSelectedItem().toString());
-                team2Score.setText(Integer.toString(currentScore - spinnerValue  > 0 ? currentScore-spinnerValue : 0));
+                if(currentScore - spinnerValue >= 0) {
+                    team2Score.setText(Integer.toString(currentScore - spinnerValue));
+                } else {
+                    alert("Score cannot be less than 0!");
+                }
             }
         });
 
@@ -93,6 +116,23 @@ public class MainActivity extends AppCompatActivity {
                 team2Score.setText("0");
             }
         });
+    }
 
+    private void alert(String message){
+        AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+                .setTitle("Warning")
+                .setIcon(android.R.drawable.stat_sys_warning)
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create();
+            dialog.show();
+            ImageView imageView = dialog.findViewById(android.R.id.icon);
+            if (imageView != null)
+                imageView.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
     }
 }
