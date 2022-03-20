@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         reset = (Button) findViewById(R.id.reset);
 
+        //Listener for the button to increase score of team1
         team1Increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        //Listener for the button to increase score of team2
         team2Increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        //Listener for the Button to decrease score of team1
         team1Decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        //Listener for the button to decrease score of team2
         team2Decrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+        //Reset team1 and team2 scores
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    //To dispaly warning
     private void alert(String message){
         AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                 .setTitle("Warning")
